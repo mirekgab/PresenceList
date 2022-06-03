@@ -8,12 +8,11 @@
     </head>
     <body>
         <div class="container">
-            <h1>Presence List</h1>
-            <a href="employee/list">Employees list</a>
-            <hr/>
-            <a href="hr/index">HR department</a>
-            <br/>
-            <a href="manager/index">Department manager</a>
+            <a href="index">back</a>
+            <h2>Schedule</h2>
+            <h3>employee: <span th:text="${schedule.employee.name} +' '+ ${schedule.employee.surname}" /></h3>
+            <h3>department: <span th:text="${schedule.employee.department}" /></h3>
+          
         </div>
     </body>
 </html>
