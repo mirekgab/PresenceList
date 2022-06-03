@@ -1,13 +1,13 @@
-package pl.mirekgab.demo;
+package pl.mirekgab.presencelist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class PresenceListApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(PresenceListApp.class, args);
 	}
 
 }

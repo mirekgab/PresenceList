@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div class="container">
+            <a href="../">back</a>
+            <h2>Employees list</h2>
+            <ul>
+                <li th:each="employee : ${employees}" >
+                   <span th:text="${employee.id}" /> <span th:text="${employee.name}" /> <span th:text="${employee.surname}" /> <span th:text="${employee.department}" />
+                    
+                </li>
+                    
+                
+            </ul>
+        </div>
+    </body>
+</html>
