@@ -11,7 +11,9 @@ import pl.mirekgab.presencelist.employee.Employee;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    @Query("select s from Schedule s")
-    public List<Schedule> groupByEmployees();
+    @Query(nativeQuery = false, value = "select s from Schedule s")
+    public List<Schedule> getEmployeeSchedule();
+
+
     
 }

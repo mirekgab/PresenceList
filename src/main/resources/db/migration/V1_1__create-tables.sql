@@ -16,3 +16,11 @@ create table schedules (
     time_of_work int
 );
 
+create view schedules_group 
+as 
+select employee_id, schedule_year, schedule_month
+from schedules
+group by employee_id, schedule_year, schedule_month;
+
+
+

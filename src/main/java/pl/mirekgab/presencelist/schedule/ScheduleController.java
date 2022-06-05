@@ -24,7 +24,7 @@ public class ScheduleController {
 
     @GetMapping("/index")
     public String index(Model model) {
-        model.addAttribute("schedules", scheduleService.getAll());
+        model.addAttribute("schedules", scheduleService.getEmployeeSchedule());
         return "hr/schedule/index.html";
     }
     
