@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.mirekgab.presencelist.schedule.schedulegroup.ScheduleGroup;
 
 @Controller
 @RequestMapping("/hr/schedule")
@@ -29,9 +30,13 @@ public class ScheduleController {
     }
     
     @GetMapping("/show")
-    public String show(Model model, @RequestParam(name="schedule_id") Long scheduleId) {
-        Schedule schedule = scheduleService.findById(scheduleId);
+    public String show(Model model, @RequestParam(name="employee_id") Long employeeId, 
+            @RequestParam(name="year") int year, 
+            @RequestParam(name="month") int month) {
+        ScheduleGroup schedule = scheduleService.findByEmployeeAndYearAndMonth(employeeId, year, month);
         model.addAttribute("schedule", schedule);
         return "hr/schedule/schedule.html";
     }
+    
+    
 }

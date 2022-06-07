@@ -32,4 +32,8 @@ public class ScheduleService {
         return groupRepository.findAll();
     }
 
+    ScheduleGroup findByEmployeeAndYearAndMonth(Long employeeId, int year, int month) {
+        return groupRepository.findByEmployeeAndYearAndMonth(employeeId, year, month);
+    }
+
 }

@@ -1,6 +1,8 @@
 package pl.mirekgab.presencelist.schedule.schedulegroup;
 
-import javax.persistence.Column;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,5 +43,8 @@ public class ScheduleGroup {
     }
 
     
-    
+    public String getMonthName() {
+        String monthName = LocalDate.of(1, this.id.getMonth(), 1).getMonth().getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault());
+        return monthName;
+    }
 }

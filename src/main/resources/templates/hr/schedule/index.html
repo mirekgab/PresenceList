@@ -19,7 +19,6 @@
                         <th>department</th>
                         <th>year</th>
                         <th>month</th>
-                        <th>day</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -30,7 +29,7 @@
                         <td th:text="${schedule.employee.surname}" />
                         <td th:text="${schedule.employee.department}" />
                         <td th:text="${schedule.id.year}" />
-                        <td th:text="${schedule.id.month}" />
+                        <td th:text="${schedule.getMonthName()}" />
                         <td>
                             <a th:href="@{show(employee_id=${schedule.employee.id},year=${schedule.id.year},month=${schedule.id.month})}"  class="btn btn-primary" >show</a>
                         </td>
