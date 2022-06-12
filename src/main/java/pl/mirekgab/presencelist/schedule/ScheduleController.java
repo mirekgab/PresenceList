@@ -35,8 +35,13 @@ public class ScheduleController {
             @RequestParam(name="month") int month) {
         ScheduleGroup schedule = scheduleService.findByEmployeeAndYearAndMonth(employeeId, year, month);
         model.addAttribute("schedule", schedule);
+        model.addAttribute("schedule_days", scheduleService.generateMonth(year, month));
         return "hr/schedule/schedule.html";
     }
     
+    @GetMapping("/new")
+    public String newSchedule() {
+        return "hr/schedule/new";
+    }
     
 }
