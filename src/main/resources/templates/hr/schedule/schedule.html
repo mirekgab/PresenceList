@@ -15,7 +15,7 @@
             year: <span th:text="${schedule.id.year}" />
             <br/>
             month: <span th:text="${schedule.getMonthName()}" />
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover table-sm">
                 <thead>
                     <tr>
                         <th colspan="2">date</th>
@@ -26,17 +26,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:each="dayOfWeek:${schedule_days}" >
-                    <td th:text="${dayOfWeek.day}" />
-                    <td th:text="${dayOfWeek.dayOfWeek}" />
-                    <td th:text="${dayOfWeek.stringStartOfWork}" />
-                    <td th:text="${dayOfWeek.stringEndOfWork}" />
-                    <td th:text="${dayOfWeek.stringTimeOfWork}" />
-                    <td><a class="btn btn-primary" th:href="@{edit(employee_id=${schedule.employee.id},year=${schedule.id.year},month=${schedule.id.month},day=${dayOfWeek.day})}" >edit</a></td>
-                </tr>
+                    <tr th:each="dayOfWeek:${schedule_days}" 
+                        th:styleappend="${(dayOfWeek.dayOfWeek=='sobota' ? 'background-color:yellow' : '')
+                        + (dayOfWeek.dayOfWeek=='niedziela' ? 'background-color:lightgreen':'')}">
+                        <td th:text="${dayOfWeek.day}" />
+                        <td th:text="${dayOfWeek.dayOfWeek}" />
+                        <td th:text="${dayOfWeek.stringStartOfWork}" />
+                        <td th:text="${dayOfWeek.stringEndOfWork}" />
+                        <td th:text="${dayOfWeek.stringTimeOfWork}" />
+                        <td><a class="btn btn-primary" th:href="@{edit(employee_id=${schedule.employee.id},year=${schedule.id.year},month=${schedule.id.month},day=${dayOfWeek.day})}" >edit</a></td>
+                    </tr>
                 </tbody>
             </table>
-          
+
         </div>
     </body>
 </html>
