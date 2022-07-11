@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/bootstrap.min.css" rel="stylesheet" >
+    </head>
+    <body>
+        <div class="container">
+            <a th:href="@{show(employee_id=${schedule.employeeId},year=${schedule.year},month=${schedule.month})}">back</a>
+            <h2>Edit schedules</h2>
+            <form th:object="${schedule}" action="#" th:action="@{save}">
+                <p>employee: <input type="text" th:field="*{employeeId}"/> <input type="text" th:value="*{employeeName}"  readonly="readonly" /></p>
+                <p>year: <input type="text" th:field="*{year}" readonly="readonly" /></p>
+                <p>month: <input type="text" th:field="*{month}" readonly="readonly" /></p>
+                <p>day: <input type="text" th:field="*{day}" readonly="readonly" /></p>
+                <p>start of work: <input type="text" th:field="*{startOfWork}" /></p>
+                <p>end of work: <input type="text" readonly="readonly" th:field="*{endOfWork}" /></p>                
+                <p>time of work: <input type="text" readonly="readonly" th:field="*{timeOfWork}" /></p>
+                <input type="submit" value="save">
+            </form>
+        </div>
+    </body>
+</html>

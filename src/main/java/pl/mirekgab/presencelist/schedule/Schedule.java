@@ -106,5 +106,15 @@ public class Schedule {
         this.timeOfWork = timeOfWork;
     }
     
+    public String stringStartOfWork() {
+        return LocalTime.ofSecondOfDay(startOfWork).toString();
+    }
+    
+    public String stringEndOfWork() {
+        return LocalTime.ofSecondOfDay(endOfWork).toString();
+    }
+    public String stringTimeOfWork() {
+        return LocalTime.ofSecondOfDay(timeOfWork).toString();
+    }      
     
 }

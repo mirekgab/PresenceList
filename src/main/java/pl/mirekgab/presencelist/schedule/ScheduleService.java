@@ -4,23 +4,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.mirekgab.presencelist.schedule.schedulegroup.ScheduleGroup;
-import pl.mirekgab.presencelist.schedule.schedulegroup.ScheduleGroupRepository;
+import pl.mirekgab.presencelist.employee.EmployeeRepository;
 
 @Service
 public class ScheduleService {
 
     private final ScheduleRepository repository;
-    private final ScheduleGroupRepository groupRepository;
+
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public ScheduleService(ScheduleRepository repository, ScheduleGroupRepository groupRepository) {
+    public ScheduleService(ScheduleRepository repository, EmployeeRepository employeeRepository) {
         this.repository = repository;
-        this.groupRepository = groupRepository;
+        this.employeeRepository = employeeRepository;
     }
 
 
@@ -31,14 +32,6 @@ public class ScheduleService {
 
     public Schedule findById(Long scheduleId) {
         return repository.findById(scheduleId).orElseThrow();
-    }
-
-    public List<ScheduleGroup> getEmployeeSchedule() {
-        return groupRepository.findAll();
-    }
-
-    ScheduleGroup findByEmployeeAndYearAndMonth(Long employeeId, int year, int month) {
-        return groupRepository.findByEmployeeAndYearAndMonth(employeeId, year, month);
     }
 
     List<ScheduleMonthDto> generateMonth(int year, int month) {
@@ -54,6 +47,39 @@ public class ScheduleService {
             list.add(s);
         }
         return list;
+    }
+
+    Schedule findByEmployeeAndYearAndMonthAndDay(Long employeeId, int year, int month, int day) {
+        return repository.findByEmployeeIdAndYearAndMonthAndDay(employeeId, year, month, day);
+    }
+
+    void generateSchedule(Long employeeId, int year, int month) {
+        List<Schedule> list = new LinkedList<>();
+        List<ScheduleMonthDto> listMonth = generateMonth(year, month);
+        listMonth.stream().forEach(e->{
+            list.add(createSchedule(employeeId, year, month, e));
+        });        
+        repository.saveAllAndFlush(list);
+    }
+
+    private Schedule createSchedule(Long employeeId, int year, int month, ScheduleMonthDto e) {
+        Schedule schedule = new Schedule();
+        schedule.setEmployee(employeeRepository.findById(employeeId).get());
+        schedule.setYear(year);
+        schedule.setMonth(month);
+        schedule.setDay(e.getDay());
+        schedule.setStartOfWork(e.getStartOfWork());
+        schedule.setEndOfWork(e.getEndOfWork());
+        schedule.setTimeOfWork(e.getTimeOfWork());
+        return schedule;
+    }
+
+    void save(Schedule schedule) {
+        Schedule s = repository.findById(schedule.getId()).get();
+        s.setStartOfWork(schedule.getStartOfWork());
+        s.setEndOfWork(schedule.getEndOfWork());
+        s.setTimeOfWork(schedule.getTimeOfWork());
+        
     }
 
 }

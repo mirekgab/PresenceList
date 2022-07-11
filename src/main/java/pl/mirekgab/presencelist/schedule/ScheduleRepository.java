@@ -14,6 +14,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query(nativeQuery = false, value = "select s from Schedule s")
     public List<Schedule> getEmployeeSchedule();
 
-
+    public Schedule findByEmployeeIdAndYearAndMonthAndDay(Long employeeId, int year, int month, int day);
     
 }

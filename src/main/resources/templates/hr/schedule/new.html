@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/bootstrap.min.css" rel="stylesheet" >
+    </head>
+    <body>
+        <div class="container">
+            <a href="../index">back</a>
+            <h2>create new schedule</h2>
+            <form action="#" th:action="@{generate}" method="post">
+                <select name="employeeId">
+                    <option th:each="employee:${employees}" th:value="${employee.id}" th:text="|${employee.name} ${employee.surname}|"></option>
+                </select>
+                <input type="text" th:value="${year}" name="year"/>
+                <select name="month">
+                    <option th:each="month:${months}" th:value="${month.value}" th:text="${monthsName[month.value]}" ></option>
+                </select>
+                <input type="submit" value="generate" />
+            </form>
+        </div>
+    </body>
+</html>

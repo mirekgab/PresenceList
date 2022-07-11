@@ -34,7 +34,7 @@
                         <td th:text="${dayOfWeek.stringStartOfWork}" />
                         <td th:text="${dayOfWeek.stringEndOfWork}" />
                         <td th:text="${dayOfWeek.stringTimeOfWork}" />
-                        <td><a class="btn btn-primary" th:href="@{edit(employee_id=${schedule.employee.id},year=${schedule.id.year},month=${schedule.id.month},day=${dayOfWeek.day})}" >edit</a></td>
+                        <td><a class="btn btn-primary" th:href="@{edit(employee_id=${dayOfWeek.id})}" >edit</a></td>
                     </tr>
                 </tbody>
             </table>
