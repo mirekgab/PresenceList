@@ -10,7 +10,7 @@
             <h2>create new schedule</h2>
             <form action="#" th:action="@{generate}" method="post">
                 <select name="employeeId">
-                    <option th:each="employee:${employees}" th:value="${employee.id}" th:text="|${employee.name} ${employee.surname}|"></option>
+                    <option th:each="employee:${employees}" th:value="${employee.id}" th:text="|${employee.name} ${employee.surname} ${employee.department}|"></option>
                 </select>
                 <input type="text" th:value="${year}" name="year"/>
                 <select name="month">

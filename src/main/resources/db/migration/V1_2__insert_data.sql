@@ -1,19 +1,28 @@
 
 insert into employees (id, name, surname, department) 
 values 
-(1, 'Jan', 'Kowalski', 'ProdukcjaA'),
-(2, 'Adam', 'Nowak', 'ProdukcjaA'),
-(3, 'Zbigniew', 'Wawszyn', 'Diagnostyka');
-
--- insert into schedules(id, employee_id, schedule_year, schedule_month, 
--- schedule_day, start_of_work, end_of_work, time_of_work)
--- values 
--- (1, 1, 2022, 1, 1, 25200, 54000, 28800),
--- (2, 1, 2022, 1, 2, 25200, 54000, 28800),
--- (3, 2, 2022, 1, 1, 25200, 54000, 28800),
--- (4, 3, 2022, 1, 2, 25200, 54000, 28800),
--- (5, 3, 2022, 1, 3, 25200, 54000, 28800),
--- (6, 3, 2022, 1, 4, 25200, 54000, 28800),
--- (7, 3, 2022, 1, 5, 25200, 54000, 28800),
--- (8, 3, 2022, 1, 6, 25200, 54000, 28800),
--- (9, 1, 2022, 2, 1, 25200, 54000, 28800);
+(1,'Nina','Lipiński','ProdukcjaA'),
+(2,'Mojżesz','Szczerba','ProdukcjaA'),
+(3,'Olimpia','Kaniewski','ProdukcjaA'),
+(4,'Stanisław','Orłowski','ProdukcjaA'),
+(5,'Roger','Grzesiak','ProdukcjaA'),
+(6,'Rachela','Szczepanik','ProdukcjaA'),
+(7,'Antoni','Zych','ProdukcjaA'),
+(8,'Juliusz','Gajda','ProdukcjaA'),
+(9,'Eudoksja','Domański','ProdukcjaA'),
+(10,'Gwido','Adamiec','ProdukcjaA'),
+(11,'Józef','Kuciński','ProdukcjaD'),
+(12,'Wilhelm','Leszczyński','ProdukcjaD'),
+(13,'Klara','Grześkowiak','ProdukcjaD'),
+(14,'Gerazym','Szydłowski','ProdukcjaD'),
+(15,'Ada','Wesołowski','ProdukcjaD'),
+(16,'Paulina','Rosa','Diagnostyka'),
+(17,'Onufry','Włodarczyk','Diagnostyka'),
+(18,'Efrem','Lenart','Diagnostyka'),
+(19,'Beatrycze','Kowalczyk','Diagnostyka'),
+(20,'Damian','Majchrzak','Diagnostyka'),
+(21,'Nikola','Chmura','Remonty'),
+(22,'Joachim','Cieśla','Remonty'),
+(23,'Anastazja','Bujak','Remonty'),
+(24,'Łazarz','Kamiński','Remonty'),
+(25,'Antoni','Gawlik','Remonty');
