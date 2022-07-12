@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +51,13 @@ public class ScheduleController {
         model.addAttribute("schedule", schedule);
 
         List<ScheduleMonthDto> list = new LinkedList<>();
-        model.addAttribute("schedule_days", list);
+        List<Schedule> listSchedule = scheduleService.findByEmployeeAndYearAndMonth(employeeId, year, month);
+
+        List<ScheduleMonthDto> collect = listSchedule.stream().map(e
+                -> ScheduleMapper.mapToScheduleMonthDto(e)
+        ).collect(Collectors.toList());
+
+        model.addAttribute("schedule_days", collect);
         return "hr/schedule/show.html";
     }
 
@@ -69,23 +77,34 @@ public class ScheduleController {
     }
 
     @GetMapping("/edit")
-    public String edit(Model model, @RequestParam(name = "employee_id") Long employeeId, int year, int month, int day) {
-        Schedule schedule = scheduleService.findByEmployeeAndYearAndMonthAndDay(employeeId, year, month, day);
-        System.out.println(schedule);
+    public String edit(Model model, @RequestParam(name = "id") Long id) {
+        Schedule schedule = scheduleService.findById(id);
         model.addAttribute("schedule", ScheduleMapper.map(schedule));
         return "hr/schedule/edit.html";
     }
 
     @PostMapping("/generate")
     public String generate(Long employeeId, int year, int month) {
-        scheduleService.generateSchedule(employeeId, year, month);
-
-        return "redirect:/hr/schedule/index";
+        if (scheduleService.scheduleExists(employeeId, year, month)) {
+            return "/hr/schedule/schedule_exists.html";
+        } else {
+            scheduleService.generateSchedule(employeeId, year, month);
+            return "redirect:/hr/schedule/index";
+        }
     }
 
     @GetMapping("/save")
     public String save(ScheduleDto schedule) {
-        scheduleService.save(ScheduleMapper.map(schedule));
+        scheduleService.save(schedule);
         return "redirect:/hr/schedule/show?employee_id=" + schedule.getEmployeeId() + "&year=" + schedule.getYear() + "&month=" + schedule.getMonth();
+    }
+
+    @GetMapping("/delete")
+    public String delete(Model model,
+            @RequestParam(name = "employee_id") Long employeeId,
+            @RequestParam(name = "year") int year,
+            @RequestParam(name = "month") int month) {
+        scheduleService.delete(employeeId, year, month);
+        return "redirect:/hr/schedule/index";
     }
 }

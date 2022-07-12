@@ -1,13 +1,19 @@
-
 package pl.mirekgab.presencelist.schedule;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ScheduleMapper {
 
     public static ScheduleDto map(Schedule schedule) {
         ScheduleDto dto = new ScheduleDto();
+        dto.setId(schedule.getId());
         dto.setEmployeeId(schedule.getEmployee().getId());
-        dto.setEmployeeName(schedule.getEmployee().getName()+" "+schedule.getEmployee().getSurname());
+        dto.setEmployeeName(schedule.getEmployee().getName() + " " + schedule.getEmployee().getSurname());
         dto.setYear(schedule.getYear());
         dto.setMonth(schedule.getMonth());
         dto.setDay(schedule.getDay());
@@ -16,10 +22,15 @@ public class ScheduleMapper {
         dto.setTimeOfWork(schedule.stringTimeOfWork());
         return dto;
     }
-    
-    public static Schedule map(ScheduleDto dto) {
-        Schedule s = new Schedule();
-        
-        return s;
+
+    public static ScheduleMonthDto mapToScheduleMonthDto(Schedule schedule) {
+        ScheduleMonthDto scheduleDto = new ScheduleMonthDto();
+        scheduleDto.setId(schedule.getId());
+        scheduleDto.setDay(schedule.getDay());
+        scheduleDto.setDayOfWeek(LocalDate.of(schedule.getYear(), schedule.getMonth(), schedule.getDay()).getDayOfWeek().getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()));
+        scheduleDto.setStartOfWork(schedule.getStartOfWork());
+        scheduleDto.setEndOfWork(schedule.getEndOfWork());
+        scheduleDto.setTimeOfWork(schedule.getTimeOfWork());
+        return scheduleDto;
     }
 }

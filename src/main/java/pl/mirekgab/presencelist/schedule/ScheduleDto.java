@@ -3,6 +3,7 @@ package pl.mirekgab.presencelist.schedule;
 
 
 public class ScheduleDto {
+    private Long id;
     private Long employeeId;
     private String employeeName;
     private int year;
@@ -74,6 +75,14 @@ public class ScheduleDto {
 
     public void setTimeOfWork(String timeOfWork) {
         this.timeOfWork = timeOfWork;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

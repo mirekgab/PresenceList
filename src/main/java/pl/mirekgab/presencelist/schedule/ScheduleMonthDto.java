@@ -7,11 +7,26 @@ import java.time.LocalTime;
 
 
 public class ScheduleMonthDto {
+    private Long id;
     private int day;
     private String dayOfWeek;
     private int startOfWork;
     private int endOfWork;
     private int timeOfWork;
+
+    public ScheduleMonthDto() {
+    }
+
+    public ScheduleMonthDto(Long id, int day, String dayOfWeek, int startOfWork, int endOfWork, int timeOfWork) {
+        this.id = id;
+        this.day = day;
+        this.dayOfWeek = dayOfWeek;
+        this.startOfWork = startOfWork;
+        this.endOfWork = endOfWork;
+        this.timeOfWork = timeOfWork;
+    }
+    
+    
 
     public int getDay() {
         return day;
@@ -62,6 +77,14 @@ public class ScheduleMonthDto {
     }
     public String stringTimeOfWork() {
         return LocalTime.ofSecondOfDay(timeOfWork).toString();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }

@@ -3,10 +3,11 @@
 package pl.mirekgab.presencelist.schedule;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.mirekgab.presencelist.employee.Employee;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
@@ -15,5 +16,11 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     public List<Schedule> getEmployeeSchedule();
 
     public Schedule findByEmployeeIdAndYearAndMonthAndDay(Long employeeId, int year, int month, int day);
+    public List<Schedule> findByEmployeeIdAndYearAndMonth(Long employeeId, int year, int month);
+
+    @Modifying
+    @Transactional(Transactional.TxType.MANDATORY)
+    @Query(nativeQuery=false, value="delete from Schedule where employee_id=:employeeId and year=:year and month=:month")
+    public void deleteByEmployeeAndYearAndMonth(Long employeeId, int year, int month);
     
 }

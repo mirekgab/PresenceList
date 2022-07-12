@@ -30,6 +30,7 @@
                         <td th:text="${schedule.getMonthName()}" />
                         <td>
                             <a th:href="@{show(employee_id=${schedule.employee.id},year=${schedule.id.year},month=${schedule.id.month})}"  class="btn btn-primary" >show</a>
+                            <a th:href="@{delete(employee_id=${schedule.employee.id},year=${schedule.id.year},month=${schedule.id.month})}" class="btn btn-danger">delete</a>
                         </td>
                     </tr>
                 </tbody>
