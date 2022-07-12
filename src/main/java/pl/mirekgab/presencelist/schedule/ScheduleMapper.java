@@ -20,6 +20,7 @@ public class ScheduleMapper {
         dto.setStartOfWork(schedule.stringStartOfWork());
         dto.setEndOfWork(schedule.stringEndOfWork());
         dto.setTimeOfWork(schedule.stringTimeOfWork());
+        dto.setWorkingDay(schedule.getWorkingDay());
         return dto;
     }
 
@@ -31,6 +32,7 @@ public class ScheduleMapper {
         scheduleDto.setStartOfWork(schedule.getStartOfWork());
         scheduleDto.setEndOfWork(schedule.getEndOfWork());
         scheduleDto.setTimeOfWork(schedule.getTimeOfWork());
+        scheduleDto.setWorkingDay(schedule.getWorkingDay());
         return scheduleDto;
     }
 }

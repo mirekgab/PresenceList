@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="container">
-            <a th:href="@{show(employee_id=${schedule.employeeId},year=${schedule.year},month=${schedule.month})}">back</a>
+            
             <h2>Edit schedules</h2>
             <form th:object="${schedule}" action="#" th:action="@{save}">
                 <p>id: <input type="text" th:field="*{id}" readonly="readonly" /></p>
@@ -17,7 +17,8 @@
                 <p>start of work: <input type="text" th:field="*{startOfWork}" /></p>
                 <p>end of work: <input type="text" th:field="*{endOfWork}" /></p>                
                 <p>time of work: <input type="text" readonly="readonly" th:field="*{timeOfWork}" /></p>
-                <input type="submit" value="save">
+                <p>working day: <input type="text" th:field="*{workingDay}" /></p>
+                <input class="btn btn-primary" type="submit" value="save"> <a class="btn btn-primary" th:href="@{show(employee_id=${schedule.employeeId},year=${schedule.year},month=${schedule.month})}">cancel</a>
             </form>
         </div>
     </body>

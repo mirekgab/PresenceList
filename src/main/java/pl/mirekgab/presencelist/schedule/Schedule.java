@@ -41,6 +41,9 @@ public class Schedule {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+    
+    @Column(name="working_day")
+    private int workingDay;
 
     public Long getId() {
         return id;
@@ -116,5 +119,13 @@ public class Schedule {
     public String stringTimeOfWork() {
         return LocalTime.ofSecondOfDay(timeOfWork).toString();
     }      
+
+    public int getWorkingDay() {
+        return workingDay;
+    }
+
+    public void setWorkingDay(int workingDay) {
+        this.workingDay = workingDay;
+    }
     
 }

@@ -13,6 +13,7 @@ public class ScheduleMonthDto {
     private int startOfWork;
     private int endOfWork;
     private int timeOfWork;
+    private int workingDay;
 
     public ScheduleMonthDto() {
     }
@@ -85,6 +86,14 @@ public class ScheduleMonthDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getWorkingDay() {
+        return workingDay;
+    }
+
+    public void setWorkingDay(int workingDay) {
+        this.workingDay = workingDay;
     }
     
 }

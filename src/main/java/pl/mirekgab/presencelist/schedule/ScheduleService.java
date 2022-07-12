@@ -2,6 +2,7 @@ package pl.mirekgab.presencelist.schedule;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -57,6 +58,11 @@ public class ScheduleService {
             ScheduleMonthDto s = new ScheduleMonthDto();
             s.setDay(a);
             s.setDayOfWeek(LocalDate.of(year, month, a).getDayOfWeek().getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()));
+            if (s.getDayOfWeek().equals("sobota") || s.getDayOfWeek().equals("niedziela")) {
+                s.setWorkingDay(0);
+            } else {
+                s.setWorkingDay(1);
+            }
             s.setStartOfWork(LocalTime.of(7, 0).toSecondOfDay());
             s.setEndOfWork(LocalTime.of(15, 0).toSecondOfDay());
             s.setTimeOfWork(s.getEndOfWork() - s.getStartOfWork());
@@ -74,28 +80,21 @@ public class ScheduleService {
         schedule.setStartOfWork(e.getStartOfWork());
         schedule.setEndOfWork(e.getEndOfWork());
         schedule.setTimeOfWork(e.getTimeOfWork());
+        schedule.setWorkingDay(e.getWorkingDay());
         return schedule;
     }
 
     void save(ScheduleDto schedule) {
         Schedule s = repository.findById(schedule.getId()).get();
-        Integer[] iStartOfWork = parseTime(schedule.getStartOfWork());
-        s.setStartOfWork(LocalTime.of(iStartOfWork[0], iStartOfWork[1]).toSecondOfDay());
-
-        Integer[] iEndOfWork = parseTime(schedule.getEndOfWork());
-        s.setEndOfWork(LocalTime.of(iEndOfWork[0], iEndOfWork[1]).toSecondOfDay());
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+        s.setStartOfWork(LocalTime.parse(schedule.getStartOfWork(), formatter).toSecondOfDay());
+        s.setEndOfWork(LocalTime.parse(schedule.getEndOfWork(), formatter).toSecondOfDay());
         s.setTimeOfWork(s.getEndOfWork() - s.getStartOfWork());
+        s.setWorkingDay(schedule.getWorkingDay());
+
+
 
         repository.save(s);
-    }
-
-    private Integer[] parseTime(String time) {
-        Integer[] result = new Integer[2];
-        int separator = time.indexOf(":");
-        result[0] = Integer.parseInt(time.substring(0, separator));
-        result[1] = Integer.parseInt(time.substring(separator + 1, separator + 3));
-        return result;
     }
 
     @Transactional
