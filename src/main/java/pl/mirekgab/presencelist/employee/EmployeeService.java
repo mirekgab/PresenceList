@@ -22,4 +22,8 @@ public class EmployeeService {
         return repository.findById(l).orElseThrow();
     }
 
+    public List<Employee> findByDepartmentId(Long departmentId) {
+        return repository.findByDepartmentId(departmentId);
+    }
+
 }

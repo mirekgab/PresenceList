@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import pl.mirekgab.presencelist.department.Department;
 
 @Entity
 @Table(name="employees")
@@ -15,7 +18,9 @@ public class Employee {
     
     private String name;
     private String surname;
-    private String department;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     public Long getId() {
         return id;
@@ -41,12 +46,13 @@ public class Employee {
         this.surname = surname;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
+
     
 }

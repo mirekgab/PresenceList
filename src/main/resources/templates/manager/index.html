@@ -8,6 +8,17 @@
         <div class="container">
             <a href="../index">back</a>
             <h2>Department manager</h2>
+            <form action="#" th:action="@{department}" method="get">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">department</label>
+                    <div class="col-sm-4">
+                        <select name="departmentId" class="form-control form-control-sm" >
+                            <option th:each="department:${departments}" th:value="${department.id}" th:text="${department.name}" ></option>
+                        </select>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary" value="select" />
+            </form>
         </div>
     </body>
 </html>

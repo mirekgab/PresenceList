@@ -6,26 +6,25 @@
     </head>
     <body>
         <div class="container">
-            <a href="../index">back</a>
-            <h2>Employees list</h2>
+            <a href="index">back</a>
+            <h2>Department manager</h2>
+            <h3 th:text="|department name: ${department.name}|"></h3>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>name</th>
                         <th>surname</th>
-                        <th>department</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="employee:${employees}">
+                    <tr th:each="employee: ${employees}">
                         <td th:text="${employee.id}" />
                         <td th:text="${employee.name}" />
                         <td th:text="${employee.surname}" />
-                        <td th:text="${employee.department.name}" />
                     </tr>
                 </tbody>
-            </table>
+            </table>                        
         </div>
     </body>
 </html>
