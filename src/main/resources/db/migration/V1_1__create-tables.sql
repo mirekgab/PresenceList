@@ -1,8 +1,14 @@
+create table departments(
+    id bigint auto_increment,
+    name varchar(20),
+    primary key(id)
+);
+
 create table employees (
 id bigint auto_increment,
 name varchar(100),
 surname varchar(100),
-department varchar(100),
+department_id bigint,
 primary key(id)
 );
 
@@ -24,6 +30,4 @@ as
 select employee_id, schedule_year, schedule_month
 from schedules
 group by employee_id, schedule_year, schedule_month;
-
-
 
