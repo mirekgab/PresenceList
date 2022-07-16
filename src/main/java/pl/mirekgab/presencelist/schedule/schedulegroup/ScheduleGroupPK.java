@@ -45,6 +45,37 @@ public class ScheduleGroupPK implements Serializable {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + year;
+        hash = 31 * hash + month;
+        hash = 31 * hash + employee.getId().intValue();
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ScheduleGroupPK other = (ScheduleGroupPK) obj;
+        if (this.year != other.year) {
+            return false;
+        }
+        if (this.month != other.month) {
+            return false;
+        }
+        return this.employee.getId().intValue()==other.employee.getId().intValue();
+    }
+    
     
     
     
