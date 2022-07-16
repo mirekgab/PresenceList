@@ -47,4 +47,5 @@ public class ScheduleGroupPK implements Serializable {
     }
     
     
+    
 }
