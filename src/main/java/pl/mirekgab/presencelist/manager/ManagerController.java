@@ -1,6 +1,7 @@
 package pl.mirekgab.presencelist.manager;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,9 @@ import pl.mirekgab.presencelist.employee.EmployeeService;
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
+
+    private static final Logger LOG = Logger.getLogger(ManagerController.class.getName());
+    
 
     private final DepartmentService departmentService;
     private final EmployeeService employeeService;
@@ -32,16 +36,12 @@ public class ManagerController {
     }
 
     @GetMapping("/department")
-    public String department(Model model, Long departmentId) {
-        System.out.println(departmentId);
+    public String department(Model model, Long departmentId, int year, int month) {
+        LOG.info(String.valueOf(departmentId+" "+year+" "+month));
         model.addAttribute("department", departmentService.findById(departmentId));
+        model.addAttribute("month", MonthsName.months[month]);
         model.addAttribute("employees", employeeService.findByDepartmentId(departmentId));
         return "manager/department.html";
     }
     
-    @GetMapping("/schedules")
-    public String schedules(Model model, int year, int month) {
-        System.out.println(year+" "+month);
-        return "manager/schedules.html";
-    }
 }

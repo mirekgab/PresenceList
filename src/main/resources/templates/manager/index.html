@@ -19,11 +19,6 @@
                         </select>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="select" />
-            </form>
-            <hr/>
-            <p>list of schedules of selected date</p>
-            <form action="#" th:action="@{schedules}" method="get">
                 <div class="form-group row">
                     <label class="col-sm-1 col-form-label">year</label>
                     <div class="col-sm-2">
@@ -39,9 +34,9 @@
                             <option th:each="month:${months}" th:value="${monthStat.index}" th:text="${month}" ></option>
                         </select>
                     </div>
-                </div>
+                </div>                
                 <input type="submit" class="btn btn-primary" value="select" />
-            </form>          
+            </form>
             <hr/>
         </div>
     </body>

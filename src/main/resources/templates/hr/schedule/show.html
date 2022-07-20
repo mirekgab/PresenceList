@@ -10,7 +10,7 @@
             <h2>Schedule</h2>
             employee: <span th:text="${schedule.employee.name} +' '+ ${schedule.employee.surname}" />
             <br/>
-            department: <span th:text="${schedule.employee.department}" />
+            department: <span th:text="${schedule.employee.department.name}" />
             <br/>
             year: <span th:text="${schedule.id.year}" />
             <br/>
