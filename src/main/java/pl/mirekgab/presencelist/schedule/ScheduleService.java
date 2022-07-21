@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.mirekgab.presencelist.department.Department;
 import pl.mirekgab.presencelist.employee.EmployeeRepository;
 
 @Service
@@ -38,7 +39,7 @@ public class ScheduleService {
         return repository.findByEmployeeIdAndYearAndMonthAndDay(employeeId, year, month, day);
     }
 
-    List<Schedule> findByEmployeeAndYearAndMonth(Long employeeId, int year, int month) {
+    public List<Schedule> findByEmployeeAndYearAndMonth(Long employeeId, int year, int month) {
         return repository.findByEmployeeIdAndYearAndMonth(employeeId, year, month);
     }
 
@@ -104,6 +105,11 @@ public class ScheduleService {
 
     boolean scheduleExists(Long employeeId, int year, int month) {
         return !findByEmployeeAndYearAndMonth(employeeId, year, month).isEmpty();
+    }
+
+    public List<Schedule> findByDepartmentAndYearAndMonth(Department department, int year, int month) {
+        //return repository.findByDepartmentAndYearAndMonth(department, year, month);
+        return null;
     }
 
 }

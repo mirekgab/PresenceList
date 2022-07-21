@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.mirekgab.presencelist.MonthsName;
+import pl.mirekgab.presencelist.department.Department;
 import pl.mirekgab.presencelist.department.DepartmentService;
 import pl.mirekgab.presencelist.employee.EmployeeService;
+import pl.mirekgab.presencelist.schedule.ScheduleService;
 
 @Controller
 @RequestMapping("/manager")
@@ -20,11 +22,15 @@ public class ManagerController {
 
     private final DepartmentService departmentService;
     private final EmployeeService employeeService;
+    private final ScheduleService scheduleService;
 
     @Autowired
-    public ManagerController(DepartmentService departmentService, EmployeeService employeeService) {
+    public ManagerController(DepartmentService departmentService, 
+            EmployeeService employeeService, 
+            ScheduleService scheduleService) {
         this.departmentService = departmentService;
         this.employeeService = employeeService;
+        this.scheduleService = scheduleService;
     }
 
     @GetMapping("/index")
@@ -38,8 +44,10 @@ public class ManagerController {
     @GetMapping("/department")
     public String department(Model model, Long departmentId, int year, int month) {
         LOG.info(String.valueOf(departmentId+" "+year+" "+month));
-        model.addAttribute("department", departmentService.findById(departmentId));
+        Department department = departmentService.findById(departmentId);
+        model.addAttribute("department", department);
         model.addAttribute("month", MonthsName.months[month]);
+        scheduleService.findByDepartmentAndYearAndMonth(department, year, month);
         model.addAttribute("employees", employeeService.findByDepartmentId(departmentId));
         return "manager/department.html";
     }
