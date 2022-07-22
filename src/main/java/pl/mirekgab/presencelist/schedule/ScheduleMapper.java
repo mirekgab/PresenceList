@@ -1,10 +1,7 @@
 package pl.mirekgab.presencelist.schedule;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class ScheduleMapper {
@@ -20,7 +17,7 @@ public class ScheduleMapper {
         dto.setStartOfWork(schedule.stringStartOfWork());
         dto.setEndOfWork(schedule.stringEndOfWork());
         dto.setTimeOfWork(schedule.stringTimeOfWork());
-        dto.setWorkingDay(schedule.getWorkingDay());
+        dto.setWorkingDay((schedule.getWorkingDay() != 0));
         return dto;
     }
 
@@ -32,7 +29,7 @@ public class ScheduleMapper {
         scheduleDto.setStartOfWork(schedule.getStartOfWork());
         scheduleDto.setEndOfWork(schedule.getEndOfWork());
         scheduleDto.setTimeOfWork(schedule.getTimeOfWork());
-        scheduleDto.setWorkingDay(schedule.getWorkingDay());
+        scheduleDto.setWorkingDay(schedule.getWorkingDay()!=0);
         return scheduleDto;
     }
 }

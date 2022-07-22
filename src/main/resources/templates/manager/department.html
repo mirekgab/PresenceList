@@ -16,6 +16,7 @@
                         <th>id</th>
                         <th>name</th>
                         <th>surname</th>
+                        <th>department</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +24,10 @@
                         <td th:text="${employee.id}" />
                         <td th:text="${employee.name}" />
                         <td th:text="${employee.surname}" />
+                        <td th:text="${employee.department.name}" />
+                        <td>
+                            <a th:href="@{show(employee_id=${employee.id},year=${year},month=${monthId})}"  class="btn btn-primary" >show</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>                        

@@ -60,9 +60,9 @@ public class ScheduleService {
             s.setDay(a);
             s.setDayOfWeek(LocalDate.of(year, month, a).getDayOfWeek().getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault()));
             if (s.getDayOfWeek().equals("sobota") || s.getDayOfWeek().equals("niedziela")) {
-                s.setWorkingDay(0);
+                s.setWorkingDay(false);
             } else {
-                s.setWorkingDay(1);
+                s.setWorkingDay(true);
             }
             s.setStartOfWork(LocalTime.of(7, 0).toSecondOfDay());
             s.setEndOfWork(LocalTime.of(15, 0).toSecondOfDay());
@@ -81,17 +81,17 @@ public class ScheduleService {
         schedule.setStartOfWork(e.getStartOfWork());
         schedule.setEndOfWork(e.getEndOfWork());
         schedule.setTimeOfWork(e.getTimeOfWork());
-        schedule.setWorkingDay(e.getWorkingDay());
+        schedule.setWorkingDay(e.getWorkingDay() ? 1 : 0);
         return schedule;
     }
 
-    void save(ScheduleDto schedule) {
+    public void save(ScheduleDto schedule) {
         Schedule s = repository.findById(schedule.getId()).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
         s.setStartOfWork(LocalTime.parse(schedule.getStartOfWork(), formatter).toSecondOfDay());
         s.setEndOfWork(LocalTime.parse(schedule.getEndOfWork(), formatter).toSecondOfDay());
         s.setTimeOfWork(s.getEndOfWork() - s.getStartOfWork());
-        s.setWorkingDay(schedule.getWorkingDay());
+        s.setWorkingDay(schedule.getWorkingDay() ? 1 : 0);
 
 
 
@@ -110,6 +110,22 @@ public class ScheduleService {
     public List<Schedule> findByDepartmentAndYearAndMonth(Department department, int year, int month) {
         //return repository.findByDepartmentAndYearAndMonth(department, year, month);
         return null;
+    }
+    
+    public boolean existsByEmployeeAndYearAndMonth(Long id, int year, int month) {
+        return repository.existsByEmployeeAndYearAndMonth(id, year, month);
+    }
+
+    /**
+     * 
+     * @param employeeId
+     * @param year
+     * @param month
+     * @return total working time in hour
+     */
+    public int totalWorkingTime(Long employeeId, int year, int month) {
+        int timeInSeconds = repository.totalWorkingTime(employeeId, year, month);
+        return timeInSeconds/60/60;
     }
 
 }

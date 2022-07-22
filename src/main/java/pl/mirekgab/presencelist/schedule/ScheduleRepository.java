@@ -27,5 +27,18 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Transactional(Transactional.TxType.MANDATORY)
     @Query(nativeQuery=false, value="delete from Schedule where employee_id=:employeeId and year=:year and month=:month")
     public void deleteByEmployeeAndYearAndMonth(Long employeeId, int year, int month);
+
+    @Query("select case when count(s)>0 then true else false end from Schedule s join s.employee e where e.id=:id and s.year=:year and s.month=:month")
+    public boolean existsByEmployeeAndYearAndMonth(Long id, int year, int month);
+
+    /**
+     * 
+     * @param employeeId
+     * @param year
+     * @param month
+     * @return sum time of work in seconds
+     */
+    @Query("select sum(timeOfWork) from Schedule s where working_day=1 and employee_id=:employeeId and year=:year and month=:month")
+    public int totalWorkingTime(Long employeeId, int year, int month);
     
 }

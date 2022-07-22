@@ -12,7 +12,7 @@ public class ScheduleDto {
     private String startOfWork;
     private String endOfWork;
     private String timeOfWork;
-    private int workingDay;
+    private boolean workingDay;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -86,11 +86,11 @@ public class ScheduleDto {
         this.id = id;
     }
 
-    public int getWorkingDay() {
+    public boolean getWorkingDay() {
         return workingDay;
     }
 
-    public void setWorkingDay(int workingDay) {
+    public void setWorkingDay(boolean workingDay) {
         this.workingDay = workingDay;
     }
     

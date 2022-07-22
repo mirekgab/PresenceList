@@ -13,7 +13,7 @@ public class ScheduleMonthDto {
     private int startOfWork;
     private int endOfWork;
     private int timeOfWork;
-    private int workingDay;
+    private boolean workingDay;
 
     public ScheduleMonthDto() {
     }
@@ -88,11 +88,11 @@ public class ScheduleMonthDto {
         this.id = id;
     }
 
-    public int getWorkingDay() {
+    public boolean getWorkingDay() {
         return workingDay;
     }
 
-    public void setWorkingDay(int workingDay) {
+    public void setWorkingDay(boolean workingDay) {
         this.workingDay = workingDay;
     }
     
